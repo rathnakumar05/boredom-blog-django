@@ -1,0 +1,52 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql
+    volumes:
+      - ./mysql/data/db:/var/lib/mysql
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_DATABASE=boredom
+      - MYSQL_USER=rathna
+      - MYSQL_PASSWORD=rathna
+      - MYSQL_ROOT_PASSWORD=root
+
+  mongodb:
+    image: mongo
+    volumes:
+      - ./mongo/data/mongodb:/data/db
+    ports:
+      - "27018:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+      - MONGO_USERNAME=rathna
+      - MONGO_PASSWORD=rathna
+    command: mongod --auth
+
+  web:
+    build:
+      context: ./dockerfiles/web
+      dockerfile: Dockerfile
+    volumes:
+      - ./web:/app
+    ports:
+      - "80:80"
+    environment:
+      - DATABASE_HOST=mysql
+      - DATABASE_PORT=3306
+      - DATABASE_NAME=boredom
+      - DATABASE_USER=rathna
+      - DATABASE_PASSWORD=rathna
+      - MONGODB_HOST=mongodb
+      - MONGODB_PORT=27017
+      - MONGODB_USERNAME=rathna
+      - MONGODB_PASSWORD=rathna
+      - EMAIL_HOST_USER=<your_email_username>
+      - EMAIL_HOST_PASSWORD=<your_email_password>
+      - EMAIL_HOST=<your_email_host>
+    depends_on:
+      - mysql
+      - mongodb

@@ -1,0 +1,63 @@
+{% extends "../layout/app.html" %}
+{% block css%}
+<style>
+@media (max-width: 767px) {
+    .write-form{
+        width: 100% !important;
+    }
+}
+
+</style>
+{% endblock %}
+{% block content %}
+<form class="card border p-2 mt-2 mb-4 mx-auto bg-dark  write-form w-50 shadow" method="POST" action="" enctype="multipart/form-data">
+    {% csrf_token %} 
+    <div class="mb-2">
+        <label for="{{ form.first_name.id_for_label }}" class="form-label">First Name</label>
+        {{ form.first_name }}
+        {% for error in form.first_name.errors %}
+        <div class="text-danger">{{error}}</div>
+        {% endfor %}
+    </div>
+    <div class="mb-2">
+        <label for="{{ form.last_name.id_for_label }}" class="form-label">Last Name</label>
+        {{ form.last_name }}
+        {% for error in form.last_name.errors %}
+        <div class="text-danger">{{error}}</div>
+        {% endfor %}
+    </div>
+    <div class="mb-2">
+        <label for="{{ form.about.id_for_label }}" class="form-label">About</label>
+        {{ form.about }}
+        {% for error in form.about.errors %}
+        <div class="text-danger">{{error}}</div>
+        {% endfor %}
+    </div>
+    <div class="mb-2">
+        <label for="{{ form.profile_pic.id_for_label }}" class="form-label">Profile pic</label>
+        <input type="file" name="profile_pic" class="form-control bg-dark text-white " accept="image/*" id="id_profile_pic">
+        {% for error in form.profile_pic.errors %}
+        <div class="text-danger">{{error}}</div>
+        {% endfor %}
+    </div>
+    <div class="mb-2">
+        <img class="rounded" id="image_preview"{% if form.profile_pic.value %}src="/static/{{form.profile_pic.value}}"{% endif %} style="object-fit: cover;max-height: 200px;width: 100%;">
+    </div>
+    <button type="submit" class="btn btn-light ">Save & continue</button>
+</form>
+{% endblock %}
+{% block script %}
+<script>
+    $("#id_profile_pic").on('change', function(){
+        var file = this.files[0]
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          $("#image_preview").attr('src', e.target.result);
+        }
+
+        if(file){
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
+{% endblock %}

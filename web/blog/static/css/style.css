@@ -1,0 +1,32 @@
+body.dark-mode {
+  color: #fff;
+}
+
+.bg-frost {
+    backdrop-filter: blur(8px);
+    background-color: transparent;
+}
+
+.two-line-truncate {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.nav-link-dark.active {
+  color: var(--bs-white) !important;
+  background-color: var(--bs-border-color-translucent) !important;
+  border-color: var(--bs-border-color-translucent) !important;
+}
+
+.nav-tabs-dark {
+  border-bottom: var(--bs-nav-tabs-border-width) solid var(--bs-border-color-translucent) !important;
+}
+
+.nav-tabs-dark .nav-link:focus, .nav-tabs .nav-link:hover {
+  border-color: var(--bs-border-color-translucent);
+}
+

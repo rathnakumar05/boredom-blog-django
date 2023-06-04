@@ -1,0 +1,22 @@
+{% extends "../layout/app.html" %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center my-3">Welcome to Bordedom where ideas 💡 born!</h1>
+<div class="row mt-2">
+    {% for post in posts%}
+    <div class="col-sm-12 col-md-6 col-lg-4 mb-2">
+        <div class="card bg-dark  shadow" >
+            <img src="/static/tumbnail/{{post.tumbnail}}" class="card-img-top " style="object-fit: cover; height: 200px;">
+            <div class="card-body">
+                <h5 class="card-title">{{post.title}}</h5>
+                <p class="card-text two-line-truncate">{{post.description}}</p>
+                <a href="{% url 'blog' uuid_token=post.uuid%}" class="card-link btn btn-light " target="_blank">view blog <i class="bi bi-box-arrow-up-right"></i></a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
