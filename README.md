@@ -11,8 +11,8 @@ Make sure you have Docker and Docker Compose installed on your system.
 1. Clone the Boredom repository:
 
 ```shell
-git clone <repository_url>
-cd <repository_directory>
+git clone https://github.com/rathnakumar05/boredom-blog-django.git
+cd boredom-blog-django
 ```
 
 2. Add your third-party email service credentials:

@@ -41,7 +41,7 @@
         {% endfor %}
     </div>
     <div class="mb-2">
-        <img class="rounded" id="image_preview"{% if form.profile_pic.value %}src="/static/{{form.profile_pic.value}}"{% endif %} style="object-fit: cover;max-height: 200px;width: 100%;">
+        <img class="rounded" id="image_preview"{% if form.profile_pic.value %}src="/{{form.profile_pic.value}}"{% endif %} style="object-fit: cover;max-height: 200px;width: 100%;">
     </div>
     <button type="submit" class="btn btn-light ">Save & continue</button>
 </form>
